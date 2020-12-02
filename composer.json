@@ -1,0 +1,54 @@
+{
+    "name": "coreshop/payum-unzer-bundle",
+    "type": "pimcore-bundle",
+    "description": "CoreShop - Unzer Bundle",
+    "keywords": [
+        "coreshop",
+        "pimcore",
+        "ecommerce",
+        "unzer",
+        "heidelpay"
+    ],
+    "homepage": "http://www.coreshop.org",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Dominik Pfaffenbauer",
+            "email": "dominik@pfaffenbauer.at",
+            "homepage": "https://www.pfaffenbauer.at/",
+            "role": "Developer"
+        },
+        {
+            "name": "Albert Mueller",
+            "homepage": "https://www.dgtls.com/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "coreshop/payum-unzer": "^1.0",
+        "coreshop/payum-bundle": "^2.0 | ^3.0",
+        "moneyphp/money": "^3.2"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "CoreShop\\Payum\\UnzerBundle\\": "src/CoreShop/Payum/UnzerBundle"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "pimcore": {
+            "bundles": [
+                "CoreShop\\Payum\\UnzerBundle\\UnzerBundle"
+            ]
+        }
+    }
+}
