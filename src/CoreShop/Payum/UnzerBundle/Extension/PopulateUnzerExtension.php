@@ -77,7 +77,7 @@ final class PopulateUnzerExtension implements ExtensionInterface
         if (!empty($order->getLocaleCode())) {
             $gatewayLanguage = $order->getLocaleCode();
 
-            if (strpos($gatewayLanguage, '_') === true) {
+            if (strpos($gatewayLanguage, '_') !== false) {
                 $splitGatewayLLanguage = explode('_', $gatewayLanguage);
                 $gatewayLanguage = array_shift($splitGatewayLLanguage);
             }
