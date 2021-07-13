@@ -13,45 +13,21 @@
 namespace CoreShop\Payum\UnzerBundle\Extension;
 
 use CoreShop\Component\Core\Model\OrderInterface;
-use CoreShop\Component\Order\Repository\OrderRepositoryInterface;
 use CoreShop\Component\Core\Model\PaymentInterface;
 use Payum\Core\Extension\Context;
 use Payum\Core\Extension\ExtensionInterface;
 use Payum\Core\Request\Capture;
 use Payum\Core\Request\RenderTemplate;
+use Pimcore\Model\Document\Service;
 
-/**
- * Class ObtainTokenExtension
- * @package CoreShop\Payum\UnzerBundle\Extension
- */
 final class ObtainTokenExtension implements ExtensionInterface
 {
-    /**
-     * @var OrderRepositoryInterface
-     */
-    private $orderRepository;
-
-    /**
-     * @param OrderRepositoryInterface $orderRepository
-     */
-    public function __construct(OrderRepositoryInterface $orderRepository)
-    {
-        $this->orderRepository = $orderRepository;
-    }
-
-
-    /**
-     * @param Context $context
-     */
-    public function onPostExecute(Context $context)
+    public function onPostExecute(Context $context): void
     {
 
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function onPreExecute(Context $context)
+    public function onPreExecute(Context $context): void
     {
         $request = $context->getRequest();
 
@@ -65,7 +41,8 @@ final class ObtainTokenExtension implements ExtensionInterface
             return;
         }
 
-        $previous = reset($context->getPrevious());
+        $previousContext = $context->getPrevious();
+        $previous = reset($previousContext);
 
         if (!$previous->getRequest() instanceof Capture) {
             return;
@@ -87,13 +64,12 @@ final class ObtainTokenExtension implements ExtensionInterface
         }
 
 
+        $service = new Service();
         $request->addParameter('order', $order);
+        $request->addParameter('document', $service->getNearestDocumentByPath('/' . $order->getLocaleCode()));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function onExecute(Context $context)
+    public function onExecute(Context $context): void
     {
     }
 }

@@ -19,53 +19,30 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-/**
- * Class UnzerType
- * @package CoreShop\Payum\UnzerBundle\Form\Payment
- */
 final class UnzerType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('gatewayType', ChoiceType::class, [
+            ->add('paymentType', ChoiceType::class, [
                 'choices' => [
-                    'PayPal', 'Sofort', 'CreditCard', 'DebitCard'
+                    'paypal', 'sofort', 'card'
                 ]
             ])
-            ->add('sandboxMode', CheckboxType::class, [
-
-            ])
-            ->add('securitySender', TextType::class, [
+            ->add('privateKey', TextType::class, [
                 'constraints' => [
                     new NotBlank([
                         'groups' => 'coreshop',
                     ]),
                 ],
             ])
-            ->add('userLogin', TextType::class, [
+            ->add('publicKey', TextType::class, [
                 'constraints' => [
                     new NotBlank([
                         'groups' => 'coreshop',
                     ]),
                 ],
             ])
-            ->add('userPassword', TextType::class, [
-                'constraints' => [
-                    new NotBlank([
-                        'groups' => 'coreshop',
-                    ]),
-                ]
-            ])
-            ->add('transactionChannel', TextType::class, [
-                'constraints' => [
-                    new NotBlank([
-                        'groups' => 'coreshop',
-                    ]),
-                ]
-            ]);
+        ;
     }
 }
