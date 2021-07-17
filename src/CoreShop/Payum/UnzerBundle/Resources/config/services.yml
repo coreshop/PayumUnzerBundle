@@ -1,7 +1,7 @@
 services:
     _defaults:
         public: true
-        
+
     CoreShop\Payum\UnzerBundle\Form\Payment\UnzerType:
         tags:
             - { name: coreshop.gateway_configuration_type, type: unzer }
@@ -14,11 +14,9 @@ services:
             - {name: payum.gateway_factory_builder, factory: unzer }
 
     CoreShop\Payum\UnzerBundle\Extension\PopulateUnzerExtension:
-        autowire: true
         tags:
             - { name: payum.extension, alias: unzer_populate, factory: unzer, gateway: unzer, prepend: false }
 
     CoreShop\Payum\UnzerBundle\Extension\ObtainTokenExtension:
-        autowire: true
         tags:
             - { name: payum.extension, alias: unzer_obtain_token, factory: unzer, gateway: unzer, prepend: false }

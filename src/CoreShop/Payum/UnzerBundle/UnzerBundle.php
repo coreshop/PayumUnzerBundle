@@ -15,17 +15,10 @@ namespace CoreShop\Payum\UnzerBundle;
 use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
 use Pimcore\Extension\Bundle\Traits\PackageVersionTrait;
 
-/**
- * Class UnzerBundle
- * @package CoreShop\Payum\UnzerBundle
- */
 class UnzerBundle extends AbstractPimcoreBundle
 {
     use PackageVersionTrait;
 
-    /**
-     * @inheritDoc
-     */
     protected function getComposerPackageName(): string
     {
         return 'coreshop/payum-unzer-bundle';

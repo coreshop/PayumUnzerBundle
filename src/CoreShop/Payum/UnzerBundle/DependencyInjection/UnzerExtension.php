@@ -17,10 +17,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-/**
- * Class UnzerExtension
- * @package CoreShop\Payum\UnzerBundle\DependencyInjection
- */
 class UnzerExtension extends Extension
 {
     public function load(array $config, ContainerBuilder $container)

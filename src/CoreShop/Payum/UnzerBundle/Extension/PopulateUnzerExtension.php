@@ -15,9 +15,8 @@ namespace CoreShop\Payum\UnzerBundle\Extension;
 use CoreShop\Component\Address\Model\AddressInterface;
 use CoreShop\Component\Core\Model\CustomerInterface;
 use CoreShop\Component\Order\Model\OrderInterface;
-use CoreShop\Component\Order\Repository\OrderRepositoryInterface;
 use CoreShop\Component\Core\Model\PaymentInterface;
-use CoreShop\Payum\UnzerBundle\UnzerBundleException;
+use CoreShop\Payum\UnzerBundle\UnzerException;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\DecimalMoneyFormatter;
@@ -27,29 +26,12 @@ use Payum\Core\Extension\Context;
 use Payum\Core\Extension\ExtensionInterface;
 use Payum\Core\Request\Convert;
 
-/**
- * Class PopulateUnzerExtension
- * @package CoreShop\Payum\UnzerBundle\Extension
- */
 final class PopulateUnzerExtension implements ExtensionInterface
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
-
-    /**
-     * @param OrderRepositoryInterface $orderRepository
-     */
-    public function __construct(OrderRepositoryInterface $orderRepository)
-    {
-        $this->orderRepository = $orderRepository;
-    }
-
-    /**
-     * @param Context $context
-     * @throws UnzerBundleException
-     */
     public function onPostExecute(Context $context): void
     {
+        return;
+
         $action = $context->getAction();
 
         $previousActionClassName = get_class($action);
@@ -90,7 +72,7 @@ final class PopulateUnzerExtension implements ExtensionInterface
             $invoiceAddress = $order->getInvoiceAddress();
 
             if ($customer === null || $invoiceAddress === null) {
-                throw new UnzerBundleException('Missing Customer Data.');
+                throw new UnzerException('Missing Customer Data.');
             }
 
             $customerData = [
@@ -117,11 +99,6 @@ final class PopulateUnzerExtension implements ExtensionInterface
         $request->setResult($result);
     }
 
-    /**
-     * @param int $amount
-     * @param string $currency
-     * @return string
-     */
     private function calcAmount(int $amount, string $currency): string
     {
         $money = new Money($amount, new Currency($currency));
@@ -131,12 +108,10 @@ final class PopulateUnzerExtension implements ExtensionInterface
         return $moneyFormatter->format($money);
     }
 
-    /** {@inheritdoc} */
     public function onPreExecute(Context $context): void
     {
     }
 
-    /** {@inheritdoc} */
     public function onExecute(Context $context): void
     {
     }

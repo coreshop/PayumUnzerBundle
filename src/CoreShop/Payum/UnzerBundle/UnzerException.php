@@ -14,10 +14,6 @@ declare(strict_types=1);
 
 namespace CoreShop\Payum\UnzerBundle;
 
-/**
- * Class UnzerBundleException
- * @package CoreShop\Payum\UnzerBundle
- */
-class UnzerBundleException extends \Exception
+class UnzerException extends \Exception
 {
 }
