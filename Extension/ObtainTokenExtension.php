@@ -35,7 +35,7 @@ final class ObtainTokenExtension implements ExtensionInterface
             return;
         }
 
-        $request->addParameter('layout', '@CoreShopFrontend/layout.html.twig');
+        $request->setParameter('layout', '@CoreShopFrontend/layout.html.twig');
 
         if (count($context->getPrevious()) === 0) {
             return;

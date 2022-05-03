@@ -38,7 +38,7 @@
     },
     "autoload": {
         "psr-4": {
-            "CoreShop\\Payum\\UnzerBundle\\": "src/CoreShop/Payum/UnzerBundle"
+            "CoreShop\\Payum\\UnzerBundle\\": ""
         }
     },
     "extra": {
